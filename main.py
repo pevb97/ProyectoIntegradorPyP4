@@ -7,6 +7,14 @@ def cargar_mapa(ruta: str) -> list:
         laberinto[index_fila] = list(laberinto[index_fila])
     return [laberinto, datos_laberinto(laberinto)]
 
+def pantalla_bienvenida():
+    name_player = input("Ingresa tu NickName: ")
+    print("Bienvenido al juego de los laberintos", name_player, "Oprime Enter para comenzar")
+    while True:
+        k = readkey()
+        if (k in (key.ENTER, key.ENTER_2)):
+            break
+
 def captura_movimiento() -> str:
     while True:
         k = readkey()
@@ -78,6 +86,7 @@ def movimiento(mov: str, data_lab: dict) -> list:
 
 def main():
     laberinto, data_lab = cargar_mapa("laberinto.txt")
+    pantalla_bienvenida()
     while(data_lab.get("pos_actual_player") != data_lab.get("pos_out")):
         update_mapa(laberinto, data_lab)
         mov = captura_movimiento()
